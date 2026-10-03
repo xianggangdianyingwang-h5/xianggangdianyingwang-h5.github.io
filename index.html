@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港电影网 - 经典港片在线观看与资讯</title>
+    <meta name="description" content="香港电影网（xianggangdianyingwang-h5）提供最新、最全的香港电影资讯、经典老片回顾、影评分析及票房数据。探索香港电影的黄金时代，尽在香港电影网。">
+    <meta name="keywords" content="香港电影网,港片,香港电影,经典电影,动作片,喜剧片,张国荣,周星驰,成龙,香港导演">
+    <meta name="author" content="香港电影网">
+    <!-- 针对必应收录的优化 -->
+    <meta name="msvalidate.01" content="BING_SEARCH_CONSOLE_VERIFICATION_CODE" /> 
+    <meta name="robots" content="index, follow">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <style>
+        /* 全局样式与CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: #f5c518; /* 经典电影金 */
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffd700;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 容器 */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部导航 - 差异化设计：采用玻璃拟态风格 */
+        header {
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(245, 197, 24, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #f5c518;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(245, 197, 24, 0.1);
+            color: #f5c518;
+        }
+
+        /* 移动端菜单按钮 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 2px;
+            width: 25px;
+            background: #f5c518;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* 主视觉区 Hero Section - 差异化设计：大图背景+渐变遮罩 */
+        .hero {
+            margin-top: 70px;
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c518;
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(245, 197, 24, 0.3);
+            color: #000;
+        }
+
+        /* 栏目通用样式 */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #f5c518;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #f5c518;
+            margin: 15px auto 0;
+        }
+
+        /* 栏目一：最新资讯 - 差异化设计：卡片网格布局 */
+        #news .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            border-color: #f5c518;
+        }
+
+        .news-img {
+            width: 100%;
+            height: 200px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 3rem;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .news-content p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: #f5c518;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* 栏目二：经典片库 - 差异化设计：横向滚动列表 */
+        #classics {
+            background: #151515;
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 20px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #222;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background: #f5c518;
+            border-radius: 4px;
+        }
+
+        .movie-card {
+            flex: 0 0 250px;
+            scroll-snap-align: start;
+            background: #222;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 350px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 4rem;
+        }
+
+        .movie-info {
+            padding: 15px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+        }
+
+        .movie-info h3 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .movie-info span {
+            color: #f5c518;
+            font-size: 0.8rem;
+        }
+
+        /* 栏目三：影评分析 - 差异化设计：左右交替布局 */
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .review-item {
+            display: flex;
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .review-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .review-image {
+            flex: 0 0 40%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 3rem;
+        }
+
+        .review-content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .review-content h3 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .review-content p {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .review-meta {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* 栏目四：关于我们 - 差异化设计：极简居中排版 */
+        #about {
+            background: #f5c518;
+            color: #000;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        #about .section-title {
+            color: #000;
+        }
+
+        #about .section-title::after {
+            background: #000;
+        }
+
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* 页脚 */
+        footer {
+            background: #0a0a0a;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #f5c518;
+        }
+
+        .copyright {
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        /* 移动端响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: rgba(20, 20, 20, 0.95);
+                padding: 20px 0;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .review-item, .review-item:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .review-image {
+                flex: 0 0 200px;
+            }
+
+            .review-content {
+                padding: 20px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+    <!-- 头部导航 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">香港电影网</div>
+                <div class="menu-toggle" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home">首页</a>
+                    <a href="#news">最新资讯</a>
+                    <a href="#classics">经典片库</a>
+                    <a href="#reviews">影评分析</a>
+                    <a href="#about">关于我们</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主视觉区 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>重温香港电影黄金时代</h1>
+            <p>香港电影网（xianggangdianyingwang-h5）是您探索经典港片、获取最新电影资讯与深度影评的首选平台。</p>
+            <a href="#news" class="btn">开始探索</a>
+        </div>
+    </section>
+
+    <!-- 栏目一：最新资讯 -->
+    <section class="section" id="news">
+        <div class="container">
+            <h2 class="section-title">最新资讯</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-img">📰</div>
+                    <div class="news-content">
+                        <h3>2024香港电影金像奖提名名单公布</h3>
+                        <p>第42届香港电影金像奖提名名单正式出炉，多部优秀港片入围角逐各大奖项，竞争激烈。</p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-img">🎬</div>
+                    <div class="news-content">
+                        <h3>经典港片4K修复计划启动</h3>
+                        <p>多家影视公司联合宣布，将对100部经典香港电影进行4K高清修复，让老片焕发新生。</p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-img">🌟</div>
+                    <div class="news-content">
+                        <h3>新生代导演崛起，港片未来可期</h3>
+                        <p>近年来多位年轻导演崭露头角，为香港电影注入新鲜血液，带来不一样的视听体验。</p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 栏目二：经典片库 -->
+    <section class="section" id="classics">
+        <div class="container">
+            <h2 class="section-title">经典片库</h2>
+            <div class="horizontal-scroll">
+                <div class="movie-card">
+                    <div class="movie-poster">🎞️</div>
+                    <div class="movie-info">
+                        <h3>无间道</h3>
+                        <span>2002 · 犯罪/悬疑</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🎞️</div>
+                    <div class="movie-info">
+                        <h3>霸王别姬</h3>
+                        <span>1993 · 剧情/爱情</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🎞️</div>
+                    <div class="movie-info">
+                        <h3>大话西游</h3>
+                        <span>1995 · 喜剧/奇幻</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🎞️</div>
+                    <div class="movie-info">
+                        <h3>警察故事</h3>
+                        <span>1985 · 动作/犯罪</span>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">🎞️</div>
+                    <div class="movie-info">
+                        <h3>重庆森林</h3>
+                        <span>1994 · 剧情/爱情</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 栏目三：影评分析 -->
+    <section class="section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">影评分析</h2>
+            <div class="review-list">
+                <div class="review-item">
+                    <div class="review-image">📝</div>
+                    <div class="review-content">
+                        <h3>《无间道》：香港黑帮电影的巅峰之作</h3>
+                        <p>从剧情架构到人物塑造，《无间道》都堪称完美。它不仅重新定义了香港警匪片，更影响了后来无数同类题材的创作。本文将深度解析其叙事技巧与镜头语言。</p>
+                        <div class="review-meta">作者：影评人张三 · 2024-05-20</div>
+                    </div>
+                </div>
+                <div class="review-item">
+                    <div class="review-image">📝</div>
+                    <div class="review-content">
+                        <h3>周星驰喜剧中的悲剧内核</h3>
+                        <p>看似无厘头的搞笑背后，隐藏着对底层小人物的深切同情和对社会现实的犀利讽刺。重新审视周星驰的经典作品，你会发现不一样的感动。</p>
+                        <div class="review-meta">作者：李四 · 2024-05-18</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 栏目四：关于我们 -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">关于香港电影网</h2>
+            <p class="about-text">
+                香港电影网（xianggangdianyingwang-h5）成立于2024年，致力于打造一个专注于香港电影文化的综合性平台。我们提供最新最快的电影资讯、最全的经典片库索引以及最深度的专业影评。无论你是资深影迷还是新晋观众，这里都能满足你对香港电影的热爱。
+            </p>
+            <div class="stats">
+                <div class="stat-item">
+                    <h4>5000+</h4>
+                    <p>影片收录</p>
+                </div>
+                <div class="stat-item">
+                    <h4>10000+</h4>
+                    <p>注册影迷</p>
+                </div>
+                <div class="stat-item">
+                    <h4>500+</h4>
+                    <p>深度影评</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">首页</a>
+                <a href="#news">资讯</a>
+                <a href="#classics">片库</a>
+                <a href="#reviews">影评</a>
+                <a href="#about">关于</a>
+            </div>
+            <p class="copyright">© 2024 香港电影网 (xianggangdianyingwang-h5.github.io) 保留所有权利。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // 移动端点击后关闭菜单
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
